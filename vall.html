@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Встречаемся</title>
+
+<style>
+:root{
+  --pink:#ff4f9a;
+  --pink2:#ffd1e6;
+  --text:#5a0f32;
+}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, var(--pink2), transparent 55%),
+    radial-gradient(circle at 80% 25%, #ffb3d1, transparent 55%),
+    linear-gradient(135deg,#fff0f7,#ffe6f1);
+  overflow:hidden;
+}
+
+/* карточка */
+.card{
+  background:rgba(255,255,255,.9);
+  padding:24px 18px 26px;
+  border-radius:22px;
+  text-align:center;
+  width:min(540px,92vw);
+  box-shadow:0 20px 55px rgba(255,79,154,.32);
+  border:2px solid rgba(255,79,154,.25);
+  backdrop-filter: blur(10px);
+  z-index:2;
+}
+
+.gif-wrap{
+  width:220px;height:220px;
+  margin:0 auto 10px;
+  border-radius:18px;
+  overflow:hidden;
+  border:2px solid rgba(255,79,154,.25);
+}
+.gif-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+h1{
+  margin:12px 0 8px;
+  color:var(--text);
+  font-size:clamp(20px,3.6vw,28px);
+}
+
+.sub{
+  margin:0 0 14px;
+  color:#7a2048;
+  font-weight:600;
+}
+
+/* кнопки */
+.buttons{
+  position:relative;
+  height:52px;
+}
+
+.btn{
+  padding:12px 22px;
+  border-radius:999px;
+  border:none;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 12px 26px rgba(255,79,154,.25);
+  transition:.15s ease;
+}
+.btn:active{transform:scale(.97)}
+
+.yes{
+  background:linear-gradient(135deg,#ff3f8f,#ff7fb9);
+  color:#fff;
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.no{
+  position:fixed;
+  left:50%;
+  top: calc(50% + 180px);
+  transform: translateX(-50%);
+  background:#fff;
+  color:var(--pink);
+  border:2px solid rgba(255,79,154,.55);
+  z-index:2500;
+}
+
+/* сердечки */
+.heart{
+  position:absolute;
+  font-size:18px;
+  opacity:.22;
+  animation: floatUp 8s linear infinite;
+  pointer-events:none;
+}
+@keyframes floatUp{
+  from{ transform: translateY(30px); }
+  to{ transform: translateY(-110vh); }
+}
+
+/* модалка */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.55);
+  opacity:0;
+  pointer-events:none;
+  transition:.35s;
+  display:grid;
+  place-items:center;
+  z-index:3000;
+}
+.modal-overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.modal{
+  width:min(520px,92vw);
+  background:rgba(255,255,255,.95);
+  border-radius:24px;
+  border:2px solid rgba(255,79,154,.25);
+  box-shadow:0 24px 70px rgba(0,0,0,.25);
+  padding:18px;
+  text-align:center;
+}
+
+.modal h2{
+  margin:6px 0 10px;
+  color:#b00048;
+}
+
+.modal p{
+  margin:0 0 14px;
+  color:#5a0f32;
+  font-weight:650;
+  line-height:1.35;
+}
+
+.meta{
+  background: rgba(255,79,154,.12);
+  border-radius:16px;
+  padding:10px;
+  margin-bottom:14px;
+  font-weight:800;
+}
+
+.modal button{
+  padding:12px 20px;
+  border-radius:999px;
+  font-weight:900;
+  border:none;
+  cursor:pointer;
+}
+
+.close{
+  background:#fff;
+  color:#ff3f8f;
+  border:2px solid rgba(255,79,154,.45);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="gif-wrap">
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="gif">
+  </div>
+
+  <h1>Айко, увидимся 12 мая?</h1>
+  <div class="sub">Я заеду за тобой в 18:00. Будь готова.</div>
+
+  <div class="buttons">
+    <button class="btn yes" id="yes">Да 💗</button>
+  </div>
+</div>
+
+<button class="btn no" id="no">Нет</button>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2>Договорились 🤍</h2>
+    <p>Тогда всё решено.</p>
+    <div class="meta">📅 12 мая • ⏰ 18:00</div>
+    <p>
+      Я заеду за тобой сам.<br>
+      Будь готова — остальное на мне.
+    </p>
+    <button class="close" id="close">Закрыть</button>
+  </div>
+</div>
+
+<script>
+const no = document.getElementById("no");
+const yes = document.getElementById("yes");
+const modal = document.getElementById("modal");
+
+const noTexts = [
+  "Уверена?",
+  "Подумай ещё раз",
+  "Я всё равно заеду 😉"
+];
+let n = 0;
+
+function moveNo(){
+  const r = no.getBoundingClientRect();
+  const x = Math.random()*(innerWidth-r.width-20)+10;
+  const y = Math.random()*(innerHeight-r.height-20)+10;
+  no.style.left=x+"px";
+  no.style.top=y+"px";
+  no.style.transform="none";
+}
+
+no.onclick=()=>{
+  no.textContent=noTexts[Math.min(n,noTexts.length-1)];
+  n++;
+  moveNo();
+}
+
+yes.onclick=()=>{
+  modal.classList.add("show");
+}
+
+document.getElementById("close").onclick=()=>{
+  modal.classList.remove("show");
+}
+
+/* фоновые сердечки */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.textContent=["💗","💖","💘","💕"][Math.random()*4|0];
+  h.style.left=Math.random()*100+"vw";
+  h.style.top="90vh";
+  h.style.animationDuration=(6+Math.random()*6)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),12000);
+},450);
+</script>
+
+</body>
+</html>
