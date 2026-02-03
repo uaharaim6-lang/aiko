@@ -1,269 +1,274 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Кукинг вдвоем 😉</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMERA NAILS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Общие стили --- */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #fff5f8;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        header {
+            background: #f06292;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            margin: 0 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
 
-<style>
-:root{
-  --pink:#ff4f9a;
-  --pink2:#ffd1e6;
-  --text:#5a0f32;
-  --accent:#ff1f7a;
-}
-*{box-sizing:border-box}
+        /* --- Секции --- */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #f06292;
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
 
-body{
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(circle at 20% 20%, var(--pink2), transparent 55%),
-    radial-gradient(circle at 80% 25%, #ffb3d1, transparent 55%),
-    linear-gradient(135deg,#fff0f7,#ffe6f1);
-  overflow:hidden;
-}
+        /* --- О салоне --- */
+        .about {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .about img {
+            width: 400px;
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        .about-text {
+            max-width: 600px;
+            margin: 10px;
+        }
 
-/* карточка */
-.card{
-  background:rgba(255,255,255,.9);
-  padding:28px 20px 30px;
-  border-radius:22px;
-  text-align:center;
-  width:min(540px,92vw);
-  box-shadow:0 20px 55px rgba(255,79,154,.32);
-  border:2px solid rgba(255,79,154,.25);
-  backdrop-filter: blur(12px);
-  z-index:2;
-}
+        /* --- Услуги --- */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .service {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .service:hover {
+            transform: translateY(-5px);
+        }
+        .service h3 {
+            margin-top: 15px;
+            color: #f06292;
+        }
+        .service p {
+            margin-top: 10px;
+            font-weight: bold;
+        }
 
-.gif-wrap{
-  width:240px;height:240px;
-  margin:0 auto 12px;
-  border-radius:20px;
-  overflow:hidden;
-  border:2px solid rgba(255,79,154,.25);
-}
-.gif-wrap img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+        /* --- Галерея --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+        }
 
-h1{
-  margin:14px 0 10px;
-  color:var(--text);
-  font-size:clamp(22px,4vw,30px);
-}
+        /* --- Отзывы --- */
+        .reviews {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .review {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .review p {
+            font-style: italic;
+        }
+        .review h4 {
+            margin-top: 10px;
+            text-align: right;
+            font-weight: 700;
+            color: #f06292;
+        }
 
-.sub{
-  margin:0 0 16px;
-  color:#7a2048;
-  font-weight:600;
-  line-height:1.3;
-}
+        /* --- Контакты --- */
+        .contact {
+            text-align: center;
+        }
+        .contact a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 20px;
+            background: #f06292;
+            color: white;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .contact a:hover {
+            background: #ec407a;
+        }
+        iframe {
+            margin-top: 20px;
+            width: 100%;
+            height: 300px;
+            border: 0;
+            border-radius: 10px;
+        }
 
-/* кнопки */
-.buttons{
-  position:relative;
-  height:56px;
-}
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f06292;
+            color: white;
+        }
 
-.btn{
-  padding:14px 24px;
-  border-radius:999px;
-  border:none;
-  font-weight:800;
-  cursor:pointer;
-  box-shadow:0 12px 28px rgba(255,79,154,.25);
-  transition:.15s ease;
-}
-.btn:active{transform:scale(.96)}
-
-.yes{
-  background:linear-gradient(135deg,#ff3f8f,#ff7fb9);
-  color:#fff;
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-}
-
-.no{
-  position:fixed;
-  left:50%;
-  top: calc(50% + 200px);
-  transform: translateX(-50%);
-  background:#fff;
-  color:var(--pink);
-  border:2px solid rgba(255,79,154,.55);
-  z-index:2500;
-  font-weight:700;
-}
-
-/* сердечки и огоньки */
-.heart{
-  position:absolute;
-  font-size:20px;
-  opacity:.25;
-  animation: floatUp 8s linear infinite;
-  pointer-events:none;
-}
-@keyframes floatUp{
-  from{ transform: translateY(30px) rotate(0deg);}
-  to{ transform: translateY(-110vh) rotate(360deg);}
-}
-
-/* модалка */
-.modal-overlay{
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,.65);
-  opacity:0;
-  pointer-events:none;
-  transition:.35s;
-  display:grid;
-  place-items:center;
-  z-index:3000;
-}
-.modal-overlay.show{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.modal{
-  width:min(520px,92vw);
-  background:rgba(255,255,255,.97);
-  border-radius:24px;
-  border:2px solid rgba(255,79,154,.25);
-  box-shadow:0 24px 70px rgba(0,0,0,.35);
-  padding:20px;
-  text-align:center;
-}
-
-.modal h2{
-  margin:8px 0 12px;
-  color:var(--accent);
-}
-
-.modal p{
-  margin:0 0 14px;
-  color:#5a0f32;
-  font-weight:650;
-  line-height:1.4;
-}
-
-.meta{
-  background: rgba(255,79,154,.12);
-  border-radius:16px;
-  padding:12px;
-  margin-bottom:16px;
-  font-weight:800;
-}
-
-.modal button{
-  padding:14px 22px;
-  border-radius:999px;
-  font-weight:900;
-  border:none;
-  cursor:pointer;
-}
-
-.close{
-  background:#fff;
-  color:#ff3f8f;
-  border:2px solid rgba(255,79,154,.45);
-}
-
-/* небольшие эффекты для флирта */
-.flirt{
-  font-weight:900;
-  color:#ff1f7a;
-  animation: blink 1.2s infinite alternate;
-}
-@keyframes blink{
-  from{opacity:1;}
-  to{opacity:.3;}
-}
-</style>
+        /* --- Адаптив --- */
+        @media(max-width:768px){
+            .about {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="card">
-  <div class="gif-wrap">
-    <img src="https://media.giphy.com/media/l41lI4bYmcsPJX9Go/giphy.gif" alt="gif">
-  </div>
+    <!-- Header -->
+    <header>
+        <h1>LUMERA NAILS</h1>
+        <nav>
+            <a href="#about">О салоне</a>
+            <a href="#services">Услуги</a>
+            <a href="#gallery">Галерея</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+    </header>
 
-  <h1>Хочешь немного кукинга сегодня? 🍪😉</h1>
-  <div class="sub flirt">Я обещаю — будет горячо и вкусно 😏</div>
+    <!-- О салоне -->
+    <section id="about">
+        <h2>О нашем салоне</h2>
+        <div class="about">
+            <img src="https://images.unsplash.com/photo-1583941147795-926c073c6a12?auto=format&fit=crop&w=800&q=80" alt="Салон LUMERA NAILS">
+            <div class="about-text">
+                <p>Добро пожаловать в LUMERA NAILS – ваш профессиональный маникюрный салон. Мы создаем уникальные дизайны ногтей и заботимся о каждом клиенте. Наши мастера используют только качественные материалы и следят за последними трендами в nail-индустрии.</p>
+            </div>
+        </div>
+    </section>
 
-  <div class="buttons">
-    <button class="btn yes" id="yes">Да, готова 💗🔥</button>
-  </div>
-</div>
+    <!-- Услуги -->
+    <section id="services">
+        <h2>Наши услуги</h2>
+        <div class="services">
+            <div class="service">
+                <img src="https://images.unsplash.com/photo-1600185362190-9f9e1468bba8?auto=format&fit=crop&w=400&q=80" alt="Маникюр">
+                <h3>Маникюр</h3>
+                <p>1500₸ – 3000₸</p>
+            </div>
+            <div class="service">
+                <img src="https://images.unsplash.com/photo-1597645587822-e99fa5d45d25?auto=format&fit=crop&w=400&q=80" alt="Педикюр">
+                <h3>Педикюр</h3>
+                <p>2500₸ – 4000₸</p>
+            </div>
+            <div class="service">
+                <img src="https://images.unsplash.com/photo-1597564127353-8d52f0f37d82?auto=format&fit=crop&w=400&q=80" alt="Дизайн ногтей">
+                <h3>Дизайн ногтей</h3>
+                <p>500₸ – 1500₸</p>
+            </div>
+            <div class="service">
+                <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=400&q=80" alt="Наращивание">
+                <h3>Наращивание</h3>
+                <p>4000₸ – 7000₸</p>
+            </div>
+        </div>
+    </section>
 
-<button class="btn no" id="no">Нет… 🥺</button>
+    <!-- Галерея -->
+    <section id="gallery">
+        <h2>Галерея работ</h2>
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1597600111925-005c2fcf1ec5?auto=format&fit=crop&w=400&q=80" alt="Работа 1">
+            <img src="https://images.unsplash.com/photo-1597600104917-c87b83f4c7e5?auto=format&fit=crop&w=400&q=80" alt="Работа 2">
+            <img src="https://images.unsplash.com/photo-1597600109058-20e6c7f62fd7?auto=format&fit=crop&w=400&q=80" alt="Работа 3">
+            <img src="https://images.unsplash.com/photo-1597600113445-cb8e2c2b347f?auto=format&fit=crop&w=400&q=80" alt="Работа 4">
+        </div>
+    </section>
 
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <h2>Отлично! 🤍</h2>
-    <p>Тогда всё решено — готовься к веселью 😏</p>
-    <div class="meta">📅 Сегодня • ⏰ 20:00</div>
-    <p>
-      Я привезу всё необходимое для "кукинга".<br>
-      Будь готова к вкусным экспериментам 💕
-    </p>
-    <button class="close" id="close">Закрыть</button>
-  </div>
-</div>
+    <!-- Отзывы -->
+    <section id="reviews">
+        <h2>Отзывы клиентов</h2>
+        <div class="reviews">
+            <div class="review">
+                <p>Прекрасный салон! Мастера внимательные, дизайн просто супер.</p>
+                <h4>Анна</h4>
+            </div>
+            <div class="review">
+                <p>Очень понравился маникюр. Всё аккуратно и красиво!</p>
+                <h4>Мария</h4>
+            </div>
+            <div class="review">
+                <p>Спасибо за отличную работу и уютную атмосферу!</p>
+                <h4>Екатерина</h4>
+            </div>
+        </div>
+    </section>
 
-<script>
-const no = document.getElementById("no");
-const yes = document.getElementById("yes");
-const modal = document.getElementById("modal");
+    <!-- Контакты -->
+    <section id="contact">
+        <h2>Контакты</h2>
+        <div class="contact">
+            <a href="https://wa.me/77771234567" target="_blank">Записаться в WhatsApp</a>
+            <a href="https://instagram.com/lumera_nails" target="_blank">Instagram</a>
+            <p>Адрес: г. Алматы, ул. Маникюрная, 12</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d994.123!2d76.912345!3d43.234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE0JzQ1LjAiTiA3NsKwNTQnMDAuMCJF!5e0!3m2!1sru!2skz!4v1600000000000!5m2!1sru!2skz" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
 
-const noTexts = [
-  "Точно? 😏",
-  "Попробуй подумать ещё… 🔥",
-  "Я всё равно приду 😘"
-];
-let n = 0;
-
-function moveNo(){
-  const r = no.getBoundingClientRect();
-  const x = Math.random()*(innerWidth-r.width-20)+10;
-  const y = Math.random()*(innerHeight-r.height-20)+10;
-  no.style.left=x+"px";
-  no.style.top=y+"px";
-  no.style.transform="none";
-}
-
-no.onclick=()=>{
-  no.textContent=noTexts[Math.min(n,noTexts.length-1)];
-  n++;
-  moveNo();
-}
-
-yes.onclick=()=>{ modal.classList.add("show"); }
-
-document.getElementById("close").onclick=()=>{ modal.classList.remove("show"); }
-
-/* фоновые сердечки и огоньки */
-setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.textContent=["💗","💖","💘","💕","🔥","🍓"][Math.random()*6|0];
-  h.style.left=Math.random()*100+"vw";
-  h.style.top="90vh";
-  h.style.animationDuration=(6+Math.random()*6)+"s";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),12000);
-},350);
-</script>
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 LUMERA NAILS. Все права защищены.
+    </footer>
 
 </body>
 </html>
