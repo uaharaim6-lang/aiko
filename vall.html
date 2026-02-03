@@ -1,227 +1,133 @@
-Вот обновлённая версия сайта **LUMERA NAILS** — в лёгком «девчачьем» стиле, с розовой палитрой и плавными анимациями. Я сделал его более современным и простым, чтобы легко поддерживать и расширять.  
-
-```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUMERA NAILS</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #fff0f6;
-      color: #333;
-    }
-    header {
-      background: linear-gradient(135deg, #f48fb1, #f06292);
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
-      animation: fadeInDown 1s ease;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.8em;
-      letter-spacing: 2px;
-    }
-    nav {
-      margin-top: 15px;
-    }
-    nav a {
-      margin: 0 12px;
-      font-weight: 600;
-      color: white;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      color: #ffe4ec;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMERA NAILS</title>
+<style>
+:root{
+  --pink:#ff4f9a;
+  --pink2:#ffd1e6;
+  --text:#5a0f32;
+}
+*{box-sizing:border-box;margin:0;padding:0}
 
-    section {
-      padding: 60px 20px;
-      max-width: 1200px;
-      margin: auto;
-      animation: fadeInUp 1s ease;
-    }
-    h2 {
-      text-align: center;
-      color: #f06292;
-      margin-bottom: 40px;
-      font-size: 2em;
-    }
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Montserrat',system-ui,sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, var(--pink2), transparent 55%),
+    radial-gradient(circle at 80% 25%, #ffb3d1, transparent 55%),
+    linear-gradient(135deg,#fff0f7,#ffe6f1);
+  overflow:hidden;
+}
 
-    .about, .services, .gallery, .reviews {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .about img {
-      width: 380px;
-      border-radius: 15px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-    .about img:hover {
-      transform: scale(1.05);
-    }
-    .about-text {
-      max-width: 600px;
-      font-size: 1.1em;
-      line-height: 1.6;
-    }
+/* карточка */
+.card{
+  background:rgba(255,255,255,.9);
+  padding:28px 22px;
+  border-radius:24px;
+  text-align:center;
+  width:min(520px,92vw);
+  box-shadow:0 20px 55px rgba(255,79,154,.32);
+  border:2px solid rgba(255,79,154,.25);
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 1s ease;
+}
 
-    .service, .review {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .service:hover, .review:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-    }
-    .service h3 {
-      color: #f06292;
-      margin-top: 15px;
-    }
-    .service p {
-      font-weight: bold;
-      margin-top: 10px;
-    }
+h1{
+  margin:12px 0 8px;
+  color:var(--text);
+  font-size:clamp(22px,4vw,30px);
+}
+.sub{
+  margin:0 0 14px;
+  color:#7a2048;
+  font-weight:600;
+  line-height:1.5;
+}
 
-    .gallery img {
-      width: 260px;
-      border-radius: 12px;
-      transition: transform 0.3s;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
+/* кнопки */
+.buttons{
+  margin-top:20px;
+}
+.btn{
+  display:inline-block;
+  margin:8px;
+  padding:12px 24px;
+  border-radius:999px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 12px 26px rgba(255,79,154,.25);
+  transition:.2s ease;
+}
+.btn:hover{transform:scale(1.05)}
 
-    .review p {
-      font-style: italic;
-    }
-    .review h4 {
-      margin-top: 10px;
-      color: #f06292;
-      font-weight: 700;
-    }
+.whatsapp{
+  background:linear-gradient(135deg,#ff3f8f,#ff7fb9);
+  color:#fff;
+}
+.instagram{
+  background:#fff;
+  color:var(--pink);
+  border:2px solid rgba(255,79,154,.45);
+}
 
-    .contact {
-      text-align: center;
-    }
-    .contact a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 22px;
-      background: #f06292;
-      color: white;
-      border-radius: 25px;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .contact a:hover {
-      background: #ec407a;
-      transform: scale(1.05);
-    }
-    iframe {
-      margin-top: 20px;
-      width: 100%;
-      height: 300px;
-      border: 0;
-      border-radius: 12px;
-    }
+/* сердечки */
+.heart{
+  position:absolute;
+  font-size:20px;
+  opacity:.25;
+  animation: floatUp 8s linear infinite;
+  pointer-events:none;
+}
+@keyframes floatUp{
+  from{ transform: translateY(30px); }
+  to{ transform: translateY(-110vh); }
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #f06292;
-      color: white;
-      animation: fadeInUp 1s ease;
-    }
-
-    @media(max-width:768px){
-      .about { flex-direction: column; align-items: center; }
-      .gallery img { width: 100%; }
-    }
-
-    /* Анимации */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+/* анимация появления */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
 </head>
 <body>
 
-  <header>
-    <h1>LUMERA NAILS</h1>
-    <nav>
-      <a href="#about">О салоне</a>
-      <a href="#services">Услуги</a>
-      <a href="#gallery">Галерея</a>
-      <a href="#reviews">Отзывы</a>
-      <a href="#contact">Контакты</a>
-    </nav>
-  </header>
+<div class="card">
+  <h1>nails.lumera_semey</h1>
+  <div class="sub">
+    МАНИКЮР / НАРАЩИВАНИЕ / СЕМЕЙ<br><br>
+    Здоровье • Красота<br>
+    Ваш мастер маникюра @kozhakhanovvaa 🩷<br>
+    • гель покрытие / наращивание<br>
+    • стерильные инструменты
+  </div>
 
-  <section id="about">
-    <h2>О нашем салоне</h2>
-    <div class="about">
-      <img src="https://images.unsplash.com/photo-1583941147795-926c073c6a12?auto=format&fit=crop&w=800&q=80" alt="Салон LUMERA NAILS">
-      <div class="about-text">
-        <p>Добро пожаловать в <b>LUMERA NAILS</b> – пространство красоты и вдохновения. Мы создаём стильные дизайны ногтей, заботимся о вашем комфорте и используем только лучшие материалы. Атмосфера уюта и профессионализм мастеров делают каждый визит особенным.</p>
-      </div>
-    </div>
-  </section>
+  <div class="buttons">
+    <a class="btn whatsapp" href="https://wa.me/+77787680058" target="_blank">Записаться в WhatsApp</a>
+    <a class="btn instagram" href="https://instagram.com/nails.lumera_semey" target="_blank">Instagram</a>
+  </div>
+</div>
 
-  <section id="services">
-    <h2>Наши услуги</h2>
-    <div class="services">
-      <div class="service">
-        <img src="https://images.unsplash.com/photo-1600185362190-9f9e1468bba8?auto=format&fit=crop&w=400&q=80" alt="Маникюр">
-        <h3>Маникюр</h3>
-        <p>1500₸ – 3000₸</p>
-      </div>
-      <div class="service">
-        <img src="https://images.unsplash.com/photo-1597645587822-e99fa5d45d25?auto=format&fit=crop&w=400&q=80" alt="Педикюр">
-        <h3>Педикюр</h3>
-        <p>2500₸ – 4000₸</p>
-      </div>
-      <div class="service">
-        <img src="https://images.unsplash.com/photo-1597564127353-8d52f0f37d82?auto=format&fit=crop&w=400&q=80" alt="Дизайн ногтей">
-        <h3>Дизайн ногтей</h3>
-        <p>500₸ – 1500₸</p>
-      </div>
-      <div class="service">
-        <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=400&q=80" alt="Наращивание">
-        <h3>Наращивание</h3>
-        <p>4000₸ – 7000₸</p>
-      </div>
-    </div>
-  </section>
+<script>
+/* фоновые сердечки */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.textContent=["💗","💖","💘","💕"][Math.random()*4|0];
+  h.style.left=Math.random()*100+"vw";
+  h.style.top="90vh";
+  h.style.animationDuration=(6+Math.random()*6)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),12000);
+},500);
+</script>
 
-  <section id="gallery">
-    <h2>Галерея работ</h2>
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1597600111925-005c2fcf1ec5?auto=format&fit=crop&w=400&q=80" alt="Работа 1">
-      <img src="https://images.unsplash.com/photo-1597600104917-c87b83f4c7e5?auto=format&fit=crop&w=400&q=80" alt="Работа 2">
-      <img src="https://images.unsplash.com/photo-1597600109058-20e6c7f62fd7?auto=format&fit=crop&w=400&q=80" alt="Работа 3">
-      <img src="https://images.unsplash.com/photo-1597600113445-cb8e2c2b347f?auto=format&fit=crop&w=400&q=80" alt="Работа 4">
-    </div>
-  </section>
-
-  <section id="reviews">
-    <h2>Отзывы клиентов</h2>
-    <div class="reviews">
-     
+</body>
+</html>
