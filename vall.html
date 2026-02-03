@@ -10,22 +10,16 @@
   --pink2:#ffd1e6;
   --text:#5a0f32;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-
 body{
+  margin:0;
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  font-family:'Montserrat',system-ui,sans-serif;
-  background:
-    radial-gradient(circle at 20% 20%, var(--pink2), transparent 55%),
-    radial-gradient(circle at 80% 25%, #ffb3d1, transparent 55%),
-    linear-gradient(135deg,#fff0f7,#ffe6f1);
+  font-family:'Montserrat',sans-serif;
+  background:linear-gradient(135deg,#fff0f7,#ffe6f1);
   overflow:hidden;
 }
-
-/* карточка */
 .card{
   background:rgba(255,255,255,.9);
   padding:28px 22px;
@@ -37,7 +31,15 @@ body{
   backdrop-filter: blur(10px);
   animation: fadeInUp 1s ease;
 }
-
+.logo{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #ff4f9a;
+  margin-bottom:12px;
+  animation: glow 3s infinite alternate;
+}
 h1{
   margin:12px 0 8px;
   color:var(--text);
@@ -49,10 +51,13 @@ h1{
   font-weight:600;
   line-height:1.5;
 }
-
-/* кнопки */
-.buttons{
-  margin-top:20px;
+.prices{
+  background:rgba(255,79,154,.08);
+  border-radius:16px;
+  padding:12px;
+  margin:14px 0;
+  font-weight:600;
+  color:#5a0f32;
 }
 .btn{
   display:inline-block;
@@ -65,19 +70,9 @@ h1{
   box-shadow:0 12px 26px rgba(255,79,154,.25);
   transition:.2s ease;
 }
-.btn:hover{transform:scale(1.05)}
-
-.whatsapp{
-  background:linear-gradient(135deg,#ff3f8f,#ff7fb9);
-  color:#fff;
-}
-.instagram{
-  background:#fff;
-  color:var(--pink);
-  border:2px solid rgba(255,79,154,.45);
-}
-
-/* сердечки */
+.btn:hover{transform:scale(1.07)}
+.whatsapp{background:linear-gradient(135deg,#ff3f8f,#ff7fb9);color:#fff;}
+.instagram{background:#fff;color:var(--pink);border:2px solid rgba(255,79,154,.45);}
 .heart{
   position:absolute;
   font-size:20px;
@@ -89,28 +84,37 @@ h1{
   from{ transform: translateY(30px); }
   to{ transform: translateY(-110vh); }
 }
-
-/* анимация появления */
 @keyframes fadeInUp{
   from{opacity:0;transform:translateY(20px)}
   to{opacity:1;transform:translateY(0)}
+}
+@keyframes glow{
+  from{box-shadow:0 0 8px #ff4f9a;}
+  to{box-shadow:0 0 18px #ff4f9a;}
 }
 </style>
 </head>
 <body>
 
 <div class="card">
+  <!-- Лого -->
+  <img class="logo" src="logo.jpeg" alt="Лого LUMERA NAILS">
+  
   <h1>nails.lumera_semey</h1>
   <div class="sub">
     МАНИКЮР / НАРАЩИВАНИЕ / СЕМЕЙ<br><br>
-    Здоровье • Красота<br>
     Ваш мастер маникюра @kozhakhanovvaa 🩷<br>
     • гель покрытие / наращивание<br>
     • стерильные инструменты
   </div>
 
+  <div class="prices">
+    💅 Маникюр: 1500₸ – 3000₸ <br>
+    ✨ Наращивание: 4000₸ – 7000₸
+  </div>
+
   <div class="buttons">
-    <a class="btn whatsapp" href="https://wa.me/+77787680058" target="_blank">Записаться в WhatsApp</a>
+    <a class="btn whatsapp" href="https://wa.me/+77787680058" target="_blank">WhatsApp</a>
     <a class="btn instagram" href="https://instagram.com/nails.lumera_semey" target="_blank">Instagram</a>
   </div>
 </div>
