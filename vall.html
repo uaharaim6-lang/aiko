@@ -32,14 +32,21 @@ body{
   animation: fadeInUp 1s ease;
 }
 .logo{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid #ff4f9a;
-  margin-bottom:12px;
-  animation: glow 3s infinite alternate;
+  width:140px;          /* размер логотипа */
+  height:140px;
+  border-radius:50%;    /* круглая форма */
+  object-fit:cover;     /* картинка заполняет круг */
+  border:4px solid #ff4f9a; /* розовая рамка */
+  box-shadow:0 0 18px rgba(255,79,154,.45); /* мягкое сияние */
+  margin-bottom:14px;
+  animation: glow 3s infinite alternate; /* анимация сияния */
 }
+
+@keyframes glow{
+  from{box-shadow:0 0 8px rgba(255,79,154,.45);}
+  to{box-shadow:0 0 22px rgba(255,79,154,.75);}
+}
+
 h1{
   margin:12px 0 8px;
   color:var(--text);
@@ -135,3 +142,4 @@ setInterval(()=>{
 
 </body>
 </html>
+
