@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LUMERA NAILS</title>
+<!-- Подключаем Font Awesome для брендовых иконок -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 :root{
   --pink:#ff4f9a;
@@ -38,7 +41,7 @@ body{
   object-fit:cover;
   border:4px solid #ff4f9a;
   margin-bottom:12px;
-  animation: glow 3s infinite alternate;
+  animation: glow 3s infinite alternate, swing 4s ease-in-out infinite;
   transition:.3s ease;
 }
 .logo:hover{transform:scale(1.05)}
@@ -46,43 +49,49 @@ h1{
   margin:12px 0 8px;
   color:var(--text);
   font-size:clamp(22px,4vw,30px);
+  animation: fadeInUp 1.2s ease;
+  transition:.3s ease;
 }
-.marquee{
-  margin:10px 0;
-  color:#f06292;
-  font-weight:700;
-  overflow:hidden;
-  white-space:nowrap;
-  animation: marquee 10s linear infinite;
+h1:hover{
+  color:#ff4f9a;
+  text-shadow:0 0 8px rgba(255,79,154,.6);
 }
 .sub{
   margin:0 0 14px;
   color:#7a2048;
   font-weight:600;
   line-height:1.5;
-}
-.prices{
-  background:rgba(255,79,154,.08);
-  border-radius:16px;
-  padding:12px;
-  margin:14px 0;
-  font-weight:600;
-  color:#5a0f32;
+  animation: fadeInUp 1.4s ease;
 }
 .btn{
   display:inline-block;
-  margin:8px;
-  padding:12px 24px;
+  margin:12px;
+  padding:16px 32px;
   border-radius:999px;
   border:none;
   font-weight:700;
+  font-size:18px;
   cursor:pointer;
   box-shadow:0 12px 26px rgba(255,79,154,.25);
-  transition:.2s ease;
+  transition:.3s ease;
+  animation: pulse 2.5s infinite, fadeInUp 1.6s ease;
 }
-.btn:hover{transform:scale(1.07)}
-.whatsapp{background:linear-gradient(135deg,#ff3f8f,#ff7fb9);color:#fff;}
-.instagram{background:#fff;color:var(--pink);border:2px solid rgba(255,79,154,.45);}
+.btn i{
+  margin-right:8px; /* отступ между иконкой и текстом */
+}
+.btn:hover{
+  transform:scale(1.12);
+  box-shadow:0 0 20px rgba(255,79,154,.6);
+}
+.whatsapp{
+  background:linear-gradient(135deg,#25D366,#128C7E); /* фирменные цвета WhatsApp */
+  color:#fff;
+}
+.instagram{
+  background:#fff;
+  color:var(--pink);
+  border:2px solid rgba(255,79,154,.45);
+}
 .heart{
   position:absolute;
   font-size:20px;
@@ -95,7 +104,7 @@ h1{
   to{ transform: translateY(-110vh); }
 }
 @keyframes fadeInUp{
-  from{opacity:0;transform:translateY(20px)}
+  from{opacity:0;transform:translateY(30px)}
   to{opacity:1;transform:translateY(0)}
 }
 @keyframes glow{
@@ -103,9 +112,17 @@ h1{
   50% { box-shadow:0 0 18px #ff7fb9; }
   100% { box-shadow:0 0 10px #ff4f9a; }
 }
-@keyframes marquee{
-  from{transform:translateX(100%)}
-  to{transform:translateX(-100%)}
+@keyframes pulse {
+  0%   { transform:scale(1); }
+  50%  { transform:scale(1.05); }
+  100% { transform:scale(1); }
+}
+@keyframes swing {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
 }
 </style>
 </head>
@@ -115,6 +132,7 @@ h1{
   <!-- Лого -->
   <img class="logo" src="logo.jpeg" alt="Лого LUMERA NAILS">
 
+  <h1>nails.lumera_semey</h1>
   
   <div class="sub">
     МАНИКЮР / НАРАЩИВАНИЕ / СЕМЕЙ<br><br>
@@ -123,23 +141,22 @@ h1{
     • стерильные инструменты
   </div>
 
-  <div class="prices">
-    💅 Маникюр: 1500₸ – 3000₸ <br>
-    ✨ Наращивание: 4000₸ – 7000₸
-  </div>
-
   <div class="buttons">
-    <a class="btn whatsapp" href="https://wa.me/+77787680058" target="_blank">WhatsApp</a>
-    <a class="btn instagram" href="https://instagram.com/nails.lumera_semey" target="_blank">Instagram</a>
+    <a class="btn whatsapp" href="https://wa.me/+77787680058" target="_blank">
+      <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    </a>
+    <a class="btn instagram" href="https://instagram.com/nails.lumera_semey" target="_blank">
+      <i class="fa-brands fa-instagram"></i> Instagram
+    </a>
   </div>
 </div>
 
 <script>
-/* фоновые сердечки и звёздочки */
+/* фоновые сердечки и блёстки */
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
-  h.textContent=["💗","💖","💘","💕","✨","🌸"][Math.random()*6|0];
+  h.textContent=["💗","💖","💘","💕","✨","🌸","💅"][Math.random()*8|0];
   h.style.left=Math.random()*100+"vw";
   h.style.top="90vh";
   h.style.animationDuration=(6+Math.random()*6)+"s";
