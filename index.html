@@ -94,7 +94,6 @@ body{
   justify-content: center;
   align-items: center;
   box-shadow: 0 10px 30px rgba(212, 129, 162, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.8);
   animation: scaleIn 0.8s 0.2s both;
   transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
@@ -103,8 +102,8 @@ body{
 .logo-wrapper:hover { transform: scale(1.05) rotate(5deg); }
 
 .logo{
-  width: 120px;
-  height: 120px;
+  width: 90%;
+  height: 90%;
   border-radius:50%;
   object-fit:cover;
 }
@@ -200,7 +199,7 @@ body{
 }
 @keyframes cardBreath {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-6px); }
 }
 
 /* Всплывающее уведомление */
@@ -282,16 +281,21 @@ const card = document.querySelector('.card');
 const shine = document.querySelector('.card-shine');
 
 const handleMove = (e) => {
-  const x = e.type.includes('touch') ? e.touches[0].pageX : e.pageX;
-  const y = e.type.includes('touch') ? e.touches[0].pageY : e.pageY;
+  const x = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+  const y = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
   
-  // Наклон
-  const xAxis = (window.innerWidth / 2 - x) / 20;
-  const yAxis = (window.innerHeight / 2 - y) / 20;
-  card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+  const rect = card.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  // Вычисляем отклонение курсора от центра карточки (от -1 до 1)
+  const percentX = (x - centerX) / (rect.width / 2);
+  const percentY = (y - centerY) / (rect.height / 2);
+
+  // Наклон: поворот вокруг Y зависит от X, вокруг X — от Y (макс. 12 градусов)
+  card.style.transform = `rotateY(${percentX * 12}deg) rotateX(${-percentY * 12}deg)`;
 
   // Блик
-  const rect = card.getBoundingClientRect();
   const px = ((x - rect.left) / rect.width) * 100;
   const py = ((y - rect.top) / rect.height) * 100;
   shine.style.setProperty('--x', `${px}%`);
