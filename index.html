@@ -25,6 +25,7 @@ body{
   font-family: 'Montserrat', sans-serif;
   background: var(--bg-gradient);
   overflow: hidden;
+  height: 100vh;
   perspective: 1000px;
   -webkit-tap-highlight-color: transparent;
 }
@@ -50,6 +51,14 @@ body{
   to { transform: translate(100px, 50px) rotate(360deg); }
 }
 
+.card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: cardBreath 4s ease-in-out infinite;
+  z-index: 10;
+}
+
 .card{
   background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
   padding: 40px 25px;
@@ -61,22 +70,44 @@ body{
   backdrop-filter: blur(30px) saturate(160%);
   -webkit-backdrop-filter: blur(30px) saturate(160%);
   position: relative;
+  overflow: hidden; /* Для эффекта блика */
   transform-style: preserve-3d;
   transition: transform 0.1s ease-out;
-  animation: fadeIn 1s cubic-bezier(0.22, 1, 0.36, 1), cardBreath 4s ease-in-out infinite 1s;
+  animation: fadeIn 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
+/* Эффект блика на карточке */
+.card-shine {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.4) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.logo-wrapper {
+  width: 140px;
+  height: 140px;
+  background: #fff;
+  border-radius: 50%;
+  margin: 0 auto 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(212, 129, 162, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  animation: scaleIn 0.8s 0.2s both;
+  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 2;
+}
+.logo-wrapper:hover { transform: scale(1.05) rotate(5deg); }
+
 .logo{
-  width:130px;
-  height:130px;
+  width: 120px;
+  height: 120px;
   border-radius:50%;
   object-fit:cover;
-  border: 5px solid #fff;
-  box-shadow: 0 15px 35px rgba(212, 129, 162, 0.2);
-  margin-bottom: 20px;
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  animation: scaleIn 0.8s 0.2s both;
 }
-.logo:hover{transform:scale(1.1) rotate(5deg)}
 
 .sub{
   margin: 0 0 35px;
@@ -86,8 +117,10 @@ body{
   font-size: 15px;
   letter-spacing: 0.2px;
   animation: fadeIn 0.8s 0.4s both;
+  position: relative;
+  z-index: 2;
 }
-.sub b{ color: var(--primary); font-weight: 700; letter-spacing: 0.8px; }
+.sub b{ color: var(--primary); font-weight: 700; letter-spacing: 0.8px; cursor: pointer; }
 
 .btn{
   display: flex;
@@ -102,6 +135,7 @@ body{
   text-decoration: none;
   cursor:pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
   position: relative;
   overflow: hidden;
   animation: fadeIn 0.8s both;
@@ -165,8 +199,23 @@ body{
   to { opacity: 1; transform: scale(1); }
 }
 @keyframes cardBreath {
-  0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 40px 80px -12px rgba(212, 129, 162, 0.15); }
-  50% { transform: translateY(-5px) scale(1.01); box-shadow: 0 50px 100px -10px rgba(212, 129, 162, 0.25); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Всплывающее уведомление */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 20px;
+  font-size: 14px;
+  opacity: 0;
+  transition: 0.3s;
+  z-index: 100;
+  backdrop-filter: blur(5px);
 }
 
 /* Адаптивность под мобильные устройства */
@@ -175,9 +224,13 @@ body{
     padding: 30px 20px;
     border-radius: 30px;
   }
+  .logo-wrapper {
+    width: 120px;
+    height: 120px;
+  }
   .logo {
-    width: 110px;
-    height: 110px;
+    width: 105px;
+    height: 105px;
   }
   .sub {
     font-size: 14px;
@@ -195,39 +248,54 @@ body{
   <div class="blob blob3"></div>
 </div>
 
-<div class="card">
-  <!-- Лого -->
-  <img class="logo" src="logo.jpeg" alt="Лого LUMERA NAILS">
+<div class="card-wrapper">
+  <div class="card">
+    <div class="card-shine"></div>
+    <!-- Лого -->
+    <div class="logo-wrapper">
+      <img class="logo" src="logo.jpeg" alt="Лого LUMERA NAILS">
+    </div>
 
-  
-  <div class="sub">
-    <b>МАНИКЮР / НАРАЩИВАНИЕ / СЕМЕЙ</b><br><br>
-    Ваш мастер <b>@kozhakhanovvaa</b> 🩷<br>
-    • гель покрытие / укрепление / дизайн<br>
-    • 100% стерильные инструменты
-  </div>
+    <div class="sub">
+      <b>МАНИКЮР / НАРАЩИВАНИЕ / СЕМЕЙ</b><br><br>
+      Ваш мастер <b onclick="copyHandle()">@kozhakhanovvaa</b> 🩷<br>
+      • гель покрытие / укрепление / дизайн<br>
+      • 100% стерильные инструменты
+    </div>
 
-  <div class="buttons">
-    <a class="btn whatsapp" href="https://wa.me/+77787680058" target="_blank">
-      <i class="fa-brands fa-whatsapp"></i> WhatsApp
-    </a>
-    <a class="btn instagram" href="https://instagram.com/nails.lumera_semey" target="_blank">
-      <i class="fa-brands fa-instagram"></i> Instagram
-    </a>
+    <div class="buttons">
+      <a class="btn whatsapp" href="https://wa.me/+77787680058" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
+      <a class="btn instagram" href="https://instagram.com/nails.lumera_semey" target="_blank">
+        <i class="fa-brands fa-instagram"></i> Instagram
+      </a>
+    </div>
   </div>
 </div>
 
+<div id="toast" class="toast">Ник скопирован! ✨</div>
+
 <script>
-/* Эффект наклона карточки */
+/* Эффект наклона и блика */
 const card = document.querySelector('.card');
+const shine = document.querySelector('.card-shine');
 
 const handleMove = (e) => {
   const x = e.type.includes('touch') ? e.touches[0].pageX : e.pageX;
   const y = e.type.includes('touch') ? e.touches[0].pageY : e.pageY;
   
+  // Наклон
   const xAxis = (window.innerWidth / 2 - x) / 20;
   const yAxis = (window.innerHeight / 2 - y) / 20;
   card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+
+  // Блик
+  const rect = card.getBoundingClientRect();
+  const px = ((x - rect.left) / rect.width) * 100;
+  const py = ((y - rect.top) / rect.height) * 100;
+  shine.style.setProperty('--x', `${px}%`);
+  shine.style.setProperty('--y', `${py}%`);
 };
 
 document.addEventListener('mousemove', handleMove);
@@ -237,6 +305,14 @@ document.addEventListener('touchmove', handleMove, { passive: true });
 const resetTilt = () => card.style.transform = `rotateY(0deg) rotateX(0deg)`;
 document.addEventListener('mouseleave', resetTilt);
 document.addEventListener('touchend', resetTilt);
+
+/* Копирование ника */
+function copyHandle() {
+  navigator.clipboard.writeText('@kozhakhanovvaa');
+  const t = document.getElementById('toast');
+  t.style.opacity = '1';
+  setTimeout(() => t.style.opacity = '0', 2000);
+}
 
 /* Фоновые элементы */
 setInterval(()=>{
