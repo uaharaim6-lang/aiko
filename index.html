@@ -26,6 +26,7 @@ body{
   background: var(--bg-gradient);
   overflow: hidden;
   perspective: 1000px;
+  -webkit-tap-highlight-color: transparent;
 }
 /* Живой анимированный фон */
 .bg-blobs {
@@ -114,7 +115,10 @@ body{
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 15px 30px rgba(212, 129, 162, 0.2);
 }
-
+.btn:active {
+  transform: translateY(-1px) scale(0.98);
+  transition: 0.1s;
+}
 /* Эффект блика */
 .btn::after {
   content: '';
@@ -159,10 +163,27 @@ body{
   from { opacity: 0; transform: scale(0.8); }
   to { opacity: 1; transform: scale(1); }
 }
+
+/* Адаптивность под мобильные устройства */
+@media (max-width: 480px) {
+  .card {
+    padding: 30px 20px;
+    border-radius: 30px;
+  }
+  .logo {
+    width: 110px;
+    height: 110px;
+  }
+  .sub {
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+  .blob1 { width: 300px; height: 300px; }
+  .blob2 { width: 350px; height: 350px; }
+}
 </style>
 </head>
 <body>
-
 <div class="bg-blobs">
   <div class="blob blob1"></div>
   <div class="blob blob2"></div>
@@ -194,16 +215,23 @@ body{
 <script>
 /* Эффект наклона карточки */
 const card = document.querySelector('.card');
-document.addEventListener('mousemove', (e) => {
-  const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-  const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+
+const handleMove = (e) => {
+  const x = e.type.includes('touch') ? e.touches[0].pageX : e.pageX;
+  const y = e.type.includes('touch') ? e.touches[0].pageY : e.pageY;
+  
+  const xAxis = (window.innerWidth / 2 - x) / 20;
+  const yAxis = (window.innerHeight / 2 - y) / 20;
   card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-});
+};
+
+document.addEventListener('mousemove', handleMove);
+document.addEventListener('touchmove', handleMove, { passive: true });
 
 /* Сброс наклона при уходе мыши */
-document.addEventListener('mouseleave', () => {
-  card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-});
+const resetTilt = () => card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+document.addEventListener('mouseleave', resetTilt);
+document.addEventListener('touchend', resetTilt);
 
 /* Фоновые элементы */
 setInterval(()=>{
