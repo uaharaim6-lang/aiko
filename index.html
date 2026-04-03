@@ -63,7 +63,7 @@ body{
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.1s ease-out;
-  animation: fadeIn 1s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: fadeIn 1s cubic-bezier(0.22, 1, 0.36, 1), cardBreath 4s ease-in-out infinite 1s;
 }
 .logo{
   width:130px;
@@ -127,11 +127,12 @@ body{
   width: 200%; height: 200%;
   background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
   transform: rotate(45deg);
-  animation: shimmer 4s infinite;
+  animation: shimmer 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 @keyframes shimmer {
-  0% { left: -150%; }
-  30%, 100% { left: 150%; }
+  0% { left: -120%; opacity: 0; }
+  20% { opacity: 1; }
+  40%, 100% { left: 120%; opacity: 0; }
 }
 
 .whatsapp{
@@ -162,6 +163,10 @@ body{
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.8); }
   to { opacity: 1; transform: scale(1); }
+}
+@keyframes cardBreath {
+  0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 40px 80px -12px rgba(212, 129, 162, 0.15); }
+  50% { transform: translateY(-5px) scale(1.01); box-shadow: 0 50px 100px -10px rgba(212, 129, 162, 0.25); }
 }
 
 /* Адаптивность под мобильные устройства */
